@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+}
+.container {
+  width: 400px;
+  margin: auto;
+}
+h1 {
+  color: red;
+}
+table {
+  border-radius: 5px;
+}
