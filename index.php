@@ -11,10 +11,10 @@ if ($result->num_rows == 0){
 <div class='container mt-2 text-center '>
 <table class="table table-success table-striped" >
     <tr>
-        <td>SN</td>
-        <td>Name</td>
-        <td>City</td>
-        <td>Actions</td>
+        <th>SN</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Actions</th>
     </tr>
     <?php
     $sn = 1;

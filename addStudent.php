@@ -62,7 +62,7 @@ if (isset($_POST["ast"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
             <form class="shadow p-4 rounded" action="" method="post">
                 
                 <!-- name -->
-                <h5 class="text-center" >Add Student</h5>
+                <h5 class="text-center">Add new student</h5>
                 <div class="form-floating mb-3">
                     <input type="text" placeholder="Student Name" name="name" class="form-control <?= isset($errName) ? "is-invalid" : null ?> <?= isset($crrName) ? "is-valid" : null; ?>" value="<?= $name ?? null; ?>">
                     <div class="invalid-feedback">
