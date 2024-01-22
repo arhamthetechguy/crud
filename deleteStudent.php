@@ -28,7 +28,7 @@ if(isset($_POST["dst"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="col-md-4 w-100 mt-3 mx-auto">
             <form action="" method="post">
                 <?php if (empty($dStudentMessage)) { ?>
-                    <h5 class="text-danger">Are you sure you want to delete this student?😳g</h5>
+                    <h5 class="text-danger">Are you sure you want to delete this student?😳</h5>
                     <input class="btn btn-danger btn-md px-5" type="submit" value="Yes" name="dst">
                     <a href="./"><button class="btn btn-primary btn-md px-5" type="button">No</button></a>
                 <?php } else { ?>

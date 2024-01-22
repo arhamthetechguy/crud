@@ -16,20 +16,25 @@ if (isset($_POST["ast"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
     $city = clean($_POST["city"]);
 
     // validation
-    if(empty($name)){
+    if (empty($name)) {
         $errName = "Name field can't be empty!";
-    } elseif(!preg_match("/^[A-Za-z. ]*$/", $name)){
+    } elseif (!preg_match("/^[A-Za-z. ]*$/", $name)) {
         $errName = "Name can only contain letters and spaces!";
+    } elseif (strlen($name) < 3) {
+        $errName = "Name should be at least 3 characters long!";
     } else {
         $crrName = $name;
     }
 
     // city
-    if (empty($city)){
+    if (empty($city)) {
         $errCity = "City field can't be empty!";
+    } elseif (strlen($city) < 3) {
+        $errCity = "City should be at least 3 characters long!";
     } else {
         $crrCity = $city;
     }
+
 
     // Timeout condition
     if (!isset($errName) && !isset($errCity) && ($name !== "" || $city !== "")) {
@@ -59,7 +64,7 @@ if (isset($_POST["ast"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
                 <!-- name -->
                 <h5 class="text-center" >Add Student</h5>
                 <div class="form-floating mb-3">
-                    <input type="text" placeholder="Student Name" name="name" class="form-control <?= isset($errName) ? "is-invalid" : null ?> <?= isset($crrName) ? "is-valid" : null; ?>" value="<?= $name ?? null; ?>" value="test" >
+                    <input type="text" placeholder="Student Name" name="name" class="form-control <?= isset($errName) ? "is-invalid" : null ?> <?= isset($crrName) ? "is-valid" : null; ?>" value="<?= $name ?? null; ?>">
                     <div class="invalid-feedback">
                         <?= $errName ?? null; ?>
                     </div>
