@@ -1,2 +1,2 @@
 ## Crud Assignment
-###MySql table => students
+MySql table => students
