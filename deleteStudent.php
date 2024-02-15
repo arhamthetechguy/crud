@@ -7,6 +7,7 @@ $id = $conn->real_escape_string($id);
 $sql = "SELECT * FROM `students` WHERE `id` = '$id'";
 $result = $conn->query($sql);
 $result->num_rows == 0 ? header("location:./") : null;
+$obj = $result->fetch_object();
 
 $dStudentMessage = "";  // Initialize an empty message variable
 
@@ -14,8 +15,11 @@ $dStudentMessage = "";  // Initialize an empty message variable
 if(isset($_POST["dst"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $result = $conn->query( "DELETE FROM `students` WHERE `id` = $id");
     if($result) {
+        $delFile = unlink("./uploads/" . $obj->img);
+        if ($delFile) {
         $dStudentMessage = "Student deleted successfully!🙄";
-        echo "<script>setTimeout(() => location.href='./', 2000)</script>";
+         echo "<script>setTimeout(() => location.href='./', 2000)</script>";
+        }
     } else {
         echo "Student not deleted";
     }

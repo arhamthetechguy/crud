@@ -14,6 +14,12 @@ require_once("./db.php");
     <link rel="stylesheet" href="style.css">
 
     <title>Crud</title>
+
+    <style>
+        .container{
+            width: 800px;
+        }
+    </style>
 </head>
 <body>
     <?php require_once("./nav.php") ?>

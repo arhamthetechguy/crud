@@ -13,7 +13,11 @@ if ($result->num_rows == 0){
     <tr>
         <th>SN</th>
         <th>Name</th>
+        <th>Gender</th>
+        <th>Skills</th>
+        <th>Division</th>
         <th>City</th>
+        <th>Image</th>
         <th>Actions</th>
     </tr>
     <?php
@@ -24,7 +28,13 @@ if ($result->num_rows == 0){
     <tr>
         <td><?= $sn++ ?></td>
         <td><?= $row->name ?></td>
+        <td><?= $row->gender ?></td>
+        <td><?= $row->skills ?></td>
+        <td><?= $row->division ?></td>
         <td><?= $row->city ?></td>
+        <td>
+            <img src="./uploads/<?= $row->img ?>" alt="" style="max-width: 30px; max-height: 30px;" >
+        </td>
         <td>
             <a href="./editStudent.php?id=<?= $row->id ?>"><button class="btn btn-primary btn-sm " >Edit</button></a>
             <a href="./deleteStudent.php?id=<?= $row->id ?>"><button class="btn btn-outline-danger btn-sm" >Delete</button></a>
