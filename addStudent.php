@@ -159,12 +159,12 @@ if (!isset($errName) && !isset($errCity) && !isset($errGender) && !isset($errSki
                             <label class="fw-bold" >Gender :</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="gender" id="male" value="Male" <?= isset($gender) && $gender == "Male" ? "checked" : null ?> >
-                            <label class="form-check-label " for="male">Male</label>
+                            <input type="radio" class="form-check-input" style="cursor: pointer" name="gender" id="male" value="Male" <?= isset($gender) && $gender == "Male" ? "checked" : null ?> >
+                            <label class="form-check-label" style="cursor: pointer" for="male">Male</label>
                         </div>   
                         <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="gender" id="female" value="Female">
-                            <label class="form-check-label" for="female">Female</label>
+                            <input type="radio" class="form-check-input" style="cursor: pointer" name="gender" id="female" value="Female">
+                            <label class="form-check-label" style="cursor: pointer" for="female">Female</label>
                         </div> 
                     </div>
                     <div style="font-size: 14px"; class="<?= isset($errGender) ? "text-danger" : (isset($crrGender) ? "text-success" : null )?>">
@@ -177,20 +177,20 @@ if (!isset($errName) && !isset($errCity) && !isset($errGender) && !isset($errSki
                             <label class="fw-bold" >Skills :</label>
                         </div>
                         <div class="form-check form-check-inline ">
-                            <input class="form-check-input " type="checkbox" name="skills[]" id="HTML" value="HTML" <?= isset($crrSkills) && in_array("HTML", $crrSkills) ? "checked" : null ?> >
-                            <label class="form-check-label" for="HTML">HTML</label>
+                            <input class="form-check-input" style="cursor: pointer" type="checkbox" name="skills[]" id="HTML" value="HTML" <?= isset($crrSkills) && in_array("HTML", $crrSkills) ? "checked" : null ?> >
+                            <label class="form-check-label" style="cursor: pointer" for="HTML">HTML</label>
                         </div>
                         <div class="form-check form-check-inline ">
-                            <input class="form-check-input " type="checkbox" name="skills[]" id="CSS" value="CSS" <?= isset($crrSkills) && in_array("CSS", $crrSkills) ? "checked" : null ?> >
-                            <label class="form-check-label" for="CSS">CSS</label>
+                            <input class="form-check-input" style="cursor: pointer" type="checkbox" name="skills[]" id="CSS" value="CSS" <?= isset($crrSkills) && in_array("CSS", $crrSkills) ? "checked" : null ?> >
+                            <label class="form-check-label" style="cursor: pointer" for="CSS">CSS</label>
                         </div>
                         <div class="form-check form-check-inline ">
-                            <input class="form-check-input " type="checkbox" name="skills[]" id="JS" value="JS" <?= isset($crrSkills) && in_array("JS", $crrSkills) ? "checked" : null ?> >
-                            <label class="form-check-label" for="JS">JS</label>
+                            <input class="form-check-input" style="cursor: pointer" type="checkbox" name="skills[]" id="JS" value="JS" <?= isset($crrSkills) && in_array("JS", $crrSkills) ? "checked" : null ?> >
+                            <label class="form-check-label" style="cursor: pointer" for="JS">JS</label>
                         </div>
                         <div class="form-check form-check-inline ">
-                            <input class="form-check-input " type="checkbox" name="skills[]" id="PHP" value="PHP" <?= isset($crrSkills) && in_array("PHP", $crrSkills) ? "checked" : null ?> >
-                            <label class="form-check-label" for="PHP">PHP</label>
+                            <input class="form-check-input" style="cursor: pointer" type="checkbox" name="skills[]" id="PHP" value="PHP" <?= isset($crrSkills) && in_array("PHP", $crrSkills) ? "checked" : null ?> >
+                            <label class="form-check-label" style="cursor: pointer" for="PHP">PHP</label>
                         </div>
                      </div>
                      <div style="font-size: 14px"; class="<?= isset($errSkills) ? "text-danger" : (isset($crrSkills) ? "text-success" : null) ?>" >
