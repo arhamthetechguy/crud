@@ -40,49 +40,57 @@ if (isset($_POST["ust"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // file validation and upload
-    if (isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
-        $fileName = $_FILES['file']['name'];
-        $fileTmpName = $_FILES['file']['tmp_name'];
-        $fileSize = $_FILES['file']['size'];
+   $errFile = null; // Initialize errFile to null
 
-        $allowed = ['gif', 'jpg', 'png', 'jpeg'];
-        $fileExt = explode('.', $fileName);
-        $actualFileName = strtolower(end($fileExt));
-        $maxFileSize = 1 * 1024 * 1024;
+if (isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
+    $fileName = $_FILES['file']['name'];
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $fileSize = $_FILES['file']['size'];
 
-        if (in_array($actualFileName, $allowed)) {
-            if ($fileSize < $maxFileSize) {
-                $picNameNew = uniqid('', true) . "." . $actualFileName;
-                $picDestination = "./uploads/" . $picNameNew;
-                $move = move_uploaded_file($fileTmpName, $picDestination);
+    $allowed = ['gif', 'jpg', 'png', 'jpeg'];
+    $fileExt = explode('.', $fileName);
+    $actualFileName = strtolower(end($fileExt));
+    $maxFileSize = 1 * 1024 * 1024;
 
-                if ($move) {
-                    $result = $conn->query("UPDATE `students` SET `img`='$picNameNew' WHERE `id`= $id");
+    if (in_array($actualFileName, $allowed)) {
+        if ($fileSize < $maxFileSize) {
+            $picNameNew = uniqid('', true) . "." . $actualFileName;
+            $picDestination = "./uploads/" . $picNameNew;
+            $move = move_uploaded_file($fileTmpName, $picDestination);
 
-                    if ($result) {
-                        $delFile = unlink("./uploads/" . $row->img);
+            if ($move) {
+                $result = $conn->query("UPDATE `students` SET `img`='$picNameNew' WHERE `id`= $id");
 
-                        if ($delFile) {
-                            $upStudent = "Student Updated Successfully";
-                            echo "<script>setTimeout(() => location.href='./', 2000)</script>";
-                        } else {
-                            echo "Student Not Updated";
-                        }
+                if ($result) {
+                    $delFile = unlink("./uploads/" . $row->img);
+
+                    if ($delFile) {
+                        $upStudent = "Student Updated Successfully";
                     } else {
-                        echo "Student Not Updated";
+                        $errFile = "Error deleting old file";
                     }
                 } else {
-                    echo "File Not Uploaded";
+                    $errFile = "Student Not Updated";
                 }
             } else {
-                echo "Your file is too big";
+                $errFile = "File Not Uploaded";
             }
         } else {
-            echo "You cannot upload files of this type";
+            $errFile = "Your file is too big";
         }
+    } else {
+        $errFile = "You cannot upload files of this type";
     }
 }
+
+// Check if there's an error before redirecting
+if (!$errFile) {
+    echo "<script>setTimeout(() => location.href='./', 2000)</script>";
+}
+}
+
 ?>
+
 
 <div class="container">
     <div class="row">
@@ -188,6 +196,9 @@ if (isset($_POST["ust"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
                                 });
                             </script>
                         </div>
+                    </div>
+                    <div style="font-size: 14px;" class="text-danger " >
+                        <?= $errFile ?? null; ?>
                     </div>
                     
                     <!-- city -->

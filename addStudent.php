@@ -51,61 +51,68 @@ if (isset($_POST["ast"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     
-    //gender
-    if(empty($gender)){
-        $errGender = "Please select your gender";
+    // Gender
+if(empty($gender)){
+    $errGender = "Please select your gender";
+} else {
+    $crrGender = $gender;
+}
+
+// Skills
+if(empty($skills)){
+    $errSkills = "Please select at least one skill";
+} else {
+    $crrSkills = $skills;
+}
+
+// Division
+if(empty($select)){
+    $errSelect = "Please select your division";
+} else {
+    $crrSelect = $select;
+}
+
+// File upload
+$newFileName = ""; 
+
+if (!empty($fileName)) {
+    if (!in_array($actualFileName, $allowed)) {
+        $errFile = "Please select a valid file format to upload";
+    } elseif ($fileSize > $maxFileSize) {
+        $errFile = "File size exceeds the maximum limit of 1 MB";
     } else {
-        $crrGender = $gender;
-    }
-
-    //skills
-    if(empty($skills)){
-        $errSkills = "Please select your skills";
-    } else {
-        $crrSkills = $skills;
-    }
-
-    //select
-    if(empty($select)){
-        $errSelect = "Please select your division";
-    } else {
-        $crrSelect = $select;
-    }
-
-    //file
-    // validation
-    if (!empty($fileName)) {
-        if (!in_array($actualFileName, $allowed)) {
-            $errFile = "Please select a valid file format to upload";
-        } elseif ($fileSize > $maxFileSize) {
-            $errFile = "File size exceeds the maximum limit of 1 MB";
-        } else {
-            if (!is_dir('uploads')) {
-                mkdir('uploads');
-            }
-
-            // Creating a unique file name
-            $newFileName = str_shuffle(date('HisAFdYDyl')).uniqid('', true) . '.' . $actualFileName;
-
-            // Uploading the file
-            $uploadFile = move_uploaded_file($fileTmpName, 'uploads/' . $newFileName);
-
-            if ($uploadFile) {
-                $crrFile = "<span style='color: green' >File uploaded successfully</span>";
-            } else {
-                echo "Something went wrong";
-            }
+        if (!is_dir('uploads')) {
+            mkdir('uploads');
         }
-    } else {
-        $errFile = "Please select a file to upload";
+
+        // Creating a unique file name
+        $newFileName = str_shuffle(date('HisAFdYDyl')).uniqid('', true) . '.' . $actualFileName;
+
+        // Uploading the file
+        $uploadFile = move_uploaded_file($fileTmpName, 'uploads/' . $newFileName);
+
+        if ($uploadFile) {
+            $crrFile = "<span style='color: green' >File uploaded successfully</span>";
+        } else {
+            echo "Error uploading the file";
+        }
     }
+} else {
+    $errFile = "Please select a file to upload";
+}
+
+// City validation (additional validation)
+if (empty($city)) {
+    $errCity = "City field can't be empty!";
+} elseif (strlen($city) < 3) {
+    $errCity = "City should be at least 3 characters long!";
+} else {
+    $crrCity = $city;
+}
 
 
-
-    // Timeout condition
-    // ...
-
-if (!isset($errName) && !isset($errCity) && ($name !== "" || $city !== "")) {
+// Check for overall form submission
+if (!isset($errName) && !isset($errCity) && !isset($errGender) && !isset($errSkills) && !isset($errSelect) && !isset($errFile)) {
     $name = $conn->real_escape_string($name);
     $city = $conn->real_escape_string($city);
     
@@ -124,9 +131,6 @@ if (!isset($errName) && !isset($errCity) && ($name !== "" || $city !== "")) {
         $errStudent = "Student not added: " . $conn->error;
     }
 }
-
-// ...
-
 
 }
 
